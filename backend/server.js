@@ -64,7 +64,7 @@ const authenticateToken = (request, response, next) => {
     response.status(401);
     response.send("Invalid JWT Token");
   } else {
-    jwt.verify(jwtToken, process.env.JWT_Token, async (error, payload) => {
+    jwt.verify(jwtToken, process.env.JWT_TOKEN, async (error, payload) => {
       if (error) {
         response.status(401);
         response.send("Invalid JWT Token");
@@ -112,7 +112,7 @@ app.post("/api/login", async (request, response) => {
     const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
     if (isPasswordMatched === true) {
       const payload = { username };
-      const jwtToken = jwt.sign(payload, process.env.JWT_Token);
+      const jwtToken = jwt.sign(payload, process.env.JWT_TOKEN);
       response.send({ jwtToken });
     } else {
       response.status(400);
